@@ -34,7 +34,7 @@ done
 first_usage_address=$(LANG=C grep -obUaP "${formatted_memory_offset}" "${bin_path}" | cut -d : -f 1)
 
 # Extract a certain number of bytes from the binary file starting at that address
-bytes=$(xxd -p -l 256 --seek "${first_usage_address}" "${bin_path}" | tr -d '\n')
+bytes=$(xxd -p -l 512 --seek "${first_usage_address}" "${bin_path}" | tr -d '\n')
 
 # Apply the patch to the extracted bytes
 patched_bytes=$(echo "${bytes}" | sed 's/85c074/3bc074/')
