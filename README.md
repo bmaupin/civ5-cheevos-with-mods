@@ -21,9 +21,9 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 Use the provided patch script to patch the binaries, e.g.
 
 ```
-./script/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
-./script/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
-./script/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
+./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
+./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
+./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
 ```
 
 #### macOS
@@ -43,9 +43,9 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 Run the provided patch script using WSL (Windows Subsystem for Linux), e.g.
 
 ```
-./script/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
-./script/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
-./script/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
+./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
+./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
+./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
 ```
 
 ## Uninstall

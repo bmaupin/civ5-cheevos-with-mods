@@ -14,7 +14,9 @@ bin_path="${1}"
 file_offset=$(strings -t x "${bin_path}" | grep "SELECT ModID from Mods where Activated = 1" | awk '{ print $1}')
 
 # Get the memory offset corresponding to the file offset of the search string
-memory_offset=$(objdump --prefix-addresses -D -F -j .rdata "${bin_path}" | grep "File Offset.*${file_offset}" | awk '{print $1}')
+rdata_file_offset=$(objdump -h "${bin_path}" | grep .rdata | awk '{ print $6 }')
+rdata_memory_offset=$(objdump -h "${bin_path}" | grep .rdata | awk '{ print $4 }')
+memory_offset=$(printf "0x%X\n" $((0x$file_offset - 0x$rdata_file_offset + 0x$rdata_memory_offset)))
 
 # Drop the 0x prefix
 memory_offset=$(echo "${memory_offset}" | cut -c 3-)
