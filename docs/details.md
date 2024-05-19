@@ -4,7 +4,7 @@
 
 The game queries its local mod database to see which mods are enabled and only allows achievements for mods that come with the game or its DLC.
 
-#### How the Linux patch works
+#### How the patch works
 
 The game stores mod information in an SQLite database. Because SQLite doesn't have a boolean type, the mod activation status is stored as an integer with a value of `0` if the mod is not activated and `1` if the mod is activated.
 
@@ -12,9 +12,9 @@ When the game is looking for activated mods, it searches for a value of `1`. The
 
 Thankfully the query is only used for this one purpose, so modifying it doesn't break anything else in the game.
 
-#### How the Windows patch works
+#### How the Civ 5 Proton/Windows patch works
 
-Unfortunately modifying the database query in the Windows binaries prevents the game from launching. Perhaps there is some kind of checksum in the binaries to prevent them from being modified.
+Unfortunately modifying the database query in the Civ 5 Windows binaries prevents the game from launching. Perhaps there is some kind of checksum in the binaries to prevent them from being modified.
 
 Instead of modifying the query, the game logic itself is modified in a way so that achievements are always enabled even if mods are installed.
 

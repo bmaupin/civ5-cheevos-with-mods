@@ -1,12 +1,12 @@
-# Enable achievements with mods in Civ 5
+# Enable achievements with mods in Civ 5 or Beyond Earth
 
 💡 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
 
-This is a patch to Sid Meier's Civilization V that enables achievements while playing with mods. Normally playing with mods disables achievements.
+This is a patch to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enables achievements while playing with mods.
 
 For more information about the patch and how it works, see [docs/details.md](docs/details.md)
 
-## Install
+## Install patch (Civ 5)
 
 #### Linux (native)
 
@@ -38,8 +38,6 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is untested
-
 Run the provided patch script using WSL (Windows Subsystem for Linux), e.g.
 
 ```
@@ -48,7 +46,35 @@ Run the provided patch script using WSL (Windows Subsystem for Linux), e.g.
 ./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
 ```
 
-## Uninstall
+## Install patch (Beyond Earth)
+
+#### Linux (native)
+
+Open a terminal and run this command:
+
+```
+sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization Beyond Earth/CivBE"
+```
+
+#### Linux (Proton)
+
+Open a terminal and run these commands:
+
+```
+sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization Beyond Earth/CivilizationBE_DX11.exe"
+sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization Beyond Earth/CivilizationBE_Mantle.exe"
+```
+
+#### Windows
+
+Run these commands in PowerShell:
+
+```
+(Get-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe') | ForEach-Object { $_ -replace 'SELECT ModID from Mods where Activated = 1', 'SELECT ModID from Mods where Activated = 2' } | Set-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe'
+(Get-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_Mantle.exe') | ForEach-Object { $_ -replace 'SELECT ModID from Mods where Activated = 1', 'SELECT ModID from Mods where Activated = 2' } | Set-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_Mantle.exe'
+```
+
+## Uninstall patch
 
 To uninstall this patch:
 
@@ -57,10 +83,3 @@ To uninstall this patch:
 1. Right-click on the name of the game on the left > _Properties_
 
 1. _Installed Files_ > _Verify integrity of game files_
-
-## To do
-
-- [ ] Confirm if patch works in macOS
-- [ ] Confirm if patch works in Windows
-- [ ] Test to see if this also works with Beyond Earth
-- [ ] Write up documentation for patching Beyond Earth
