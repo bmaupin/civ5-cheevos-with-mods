@@ -4,5 +4,9 @@
   },
   "dependencies": {
     "pe-library": "^1.0.1"
-  }
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module"
 }
