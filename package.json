@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/node": "^20.12.12"
+  },
+  "dependencies": {
+    "pe-library": "^1.0.1"
+  }
+}

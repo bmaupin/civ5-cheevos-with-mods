@@ -50,11 +50,7 @@ Run the provided patch script using WSL (Windows Subsystem for Linux), e.g.
 
 #### Linux (native)
 
-Open a terminal and run this command:
-
-```
-sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization Beyond Earth/CivBE"
-```
+⚠️ Mod support for the native Linux version seems to be broken; use Proton instead.
 
 #### Linux (Proton)
 
