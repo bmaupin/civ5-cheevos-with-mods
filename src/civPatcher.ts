@@ -35,7 +35,7 @@ const main = async () => {
   const searchBuffer = new Uint8Array([0x85, 0xc0, 0x74]);
   const searchOffset = fileData.indexOf(searchBuffer, firstUsageAddress);
 
-  if (searchOffset - firstUsageAddress > 512) {
+  if (searchOffset === -1 || searchOffset - firstUsageAddress > 512) {
     console.log('Unable to apply patch; has the file already been patched?');
     process.exit();
   }
@@ -43,7 +43,9 @@ const main = async () => {
   // Apply the patch
   fileData[searchOffset] = 0x3b;
   fs.writeFile(fileToPatch, fileData);
-  console.log('Patch applied successfully');
+  console.log(
+    `Successfully replaced 0x85 at 0x${searchOffset.toString(16)} with 0x3b`
+  );
 };
 
 main();
