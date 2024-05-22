@@ -1,3 +1,3 @@
 node_modules/
-*.js
-patch-civ5.exe
+src/*.js
+patch-civ5.*

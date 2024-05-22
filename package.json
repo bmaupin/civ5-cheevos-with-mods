@@ -2,8 +2,7 @@
   "devDependencies": {
     "@types/node": "^20.12.12",
     "esbuild": "^0.21.3",
-    "pkg": "^5.8.1",
-    "typescript": "^5.4.5"
+    "pkg": "^5.8.1"
   },
   "dependencies": {
     "pe-library": "^1.0.1"

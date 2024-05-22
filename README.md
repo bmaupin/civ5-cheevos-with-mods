@@ -38,7 +38,19 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-Run the provided patch script using WSL (Windows Subsystem for Linux), e.g.
+1. Download the patch tool from [Releases](https://github.com/bmaupin/civ5-cheevos-with-mods/releases)
+
+1. Extract the patch tool using 7zip
+
+1. Run the patch tool, e.g.
+
+```
+patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV.exe'
+patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
+patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_Tablet.exe'
+```
+
+Alternatively, the patch script can be run using WSL (Windows Subsystem for Linux), e.g.
 
 ```
 ./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
