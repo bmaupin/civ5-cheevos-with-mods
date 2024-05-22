@@ -4,8 +4,6 @@
 
 This is a patch to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enables achievements while playing with mods.
 
-For more information about the patch and how it works, see [docs/details.md](docs/details.md)
-
 ## Install patch (Civ 5)
 
 #### Linux (native)
@@ -18,12 +16,10 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (Proton)
 
-Use the provided patch script to patch the binaries, e.g.
+Open a terminal and run this command:
 
 ```
-./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
-./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
-./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
+sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
 ```
 
 #### macOS
@@ -38,24 +34,10 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-1. Download the patch tool from [Releases](https://github.com/bmaupin/civ5-cheevos-with-mods/releases)
-
-1. Extract the patch tool using 7zip
-
-1. Run the patch tool, e.g.
+Run this command in PowerShell:
 
 ```
-patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV.exe'
-patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
-patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_Tablet.exe'
-```
-
-Alternatively, the patch script can be run using WSL (Windows Subsystem for Linux), e.g.
-
-```
-./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
-./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
-./scripts/apply-patch.sh "/mnt/c/Program Files (x86)/Steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_Tablet.exe"
+(Get-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe') | ForEach-Object { $_ -replace 'SELECT ModID from Mods where Activated = 1', 'SELECT ModID from Mods where Activated = 2' } | Set-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
 ```
 
 ## Install patch (Beyond Earth)
@@ -91,3 +73,25 @@ To uninstall this patch:
 1. Right-click on the name of the game on the left > _Properties_
 
 1. _Installed Files_ > _Verify integrity of game files_
+
+## How the patch works
+
+The game stores mod information in an SQLite database, which it then queries to see which mods are enabled; achivements are only allowed for mods that come with the game or its DLC.
+
+This is the query that is used to determine which mods are activated:
+
+```
+SELECT ModID from Mods where Activated = 1
+```
+
+Because SQLite doesn't have a boolean type, the mod activation status is stored as an integer with a value of `0` if the mod is not activated and `1` if the mod is activated.
+
+This patch changes the query to:
+
+```
+SELECT ModID from Mods where Activated = 2
+```
+
+As a result, the query will never return any results and so the game will always think that there are no mods enabled.
+
+Thankfully the query is only used for this one purpose, so modifying it doesn't break anything else in the game.
