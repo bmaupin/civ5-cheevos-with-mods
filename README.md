@@ -4,6 +4,16 @@
 
 This is a patch to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enables achievements while playing with mods.
 
+## Instructions
+
+1. Install the patch following the instructions below
+
+1. Start the game in Steam
+
+   ⓘ If playing Civ 5 in Proton or Windows, choose DirectX 11
+
+1. Open the _Mods_ menu and play the game with mods as desired
+
 ## Install patch (Civ 5)
 
 #### Linux (native)
@@ -34,10 +44,27 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-Run this command in PowerShell:
+Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
+
+ⓘ It will take a minute or so to run; wait until it says "Patch complete."
 
 ```
-(Get-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe') | ForEach-Object { $_ -replace 'SELECT ModID from Mods where Activated = 1', 'SELECT ModID from Mods where Activated = 2' } | Set-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
+function Replace-ContentInFile {
+    param (
+        [string]$FilePath
+    )
+    $data = Get-Content -Encoding Byte -ReadCount 0 $FilePath
+    $dataAsHexString = [BitConverter]::ToString($data)
+    $search = 'SELECT ModID from Mods where Activated = 1'
+    $replacement = 'SELECT ModID from Mods where Activated = 2'
+    $searchAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($search))
+    $replaceAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($replacement))
+    $dataAsHexString = $dataAsHexString.Replace($searchAsHexString, $replaceAsHexString)
+    $modifiedData = [byte[]] ($dataAsHexString -split '-' -replace '^', '0x')
+    Set-Content -Encoding Byte $FilePath -Value $modifiedData
+    Write-Host "Patch complete"
+}
+Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
 ```
 
 ## Install patch (Beyond Earth)
@@ -57,11 +84,28 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-Run these commands in PowerShell:
+Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
+
+ⓘ It will take a minute or so to run; wait until it says "Patch complete."
 
 ```
-(Get-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe') | ForEach-Object { $_ -replace 'SELECT ModID from Mods where Activated = 1', 'SELECT ModID from Mods where Activated = 2' } | Set-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe'
-(Get-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_Mantle.exe') | ForEach-Object { $_ -replace 'SELECT ModID from Mods where Activated = 1', 'SELECT ModID from Mods where Activated = 2' } | Set-Content 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_Mantle.exe'
+function Replace-ContentInFile {
+    param (
+        [string]$FilePath
+    )
+    $data = Get-Content -Encoding Byte -ReadCount 0 $FilePath
+    $dataAsHexString = [BitConverter]::ToString($data)
+    $search = 'SELECT ModID from Mods where Activated = 1'
+    $replacement = 'SELECT ModID from Mods where Activated = 2'
+    $searchAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($search))
+    $replaceAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($replacement))
+    $dataAsHexString = $dataAsHexString.Replace($searchAsHexString, $replaceAsHexString)
+    $modifiedData = [byte[]] ($dataAsHexString -split '-' -replace '^', '0x')
+    Set-Content -Encoding Byte $FilePath -Value $modifiedData
+    Write-Host "Patch complete"
+}
+Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe'
+Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_Mantle.exe'
 ```
 
 ## Uninstall patch
