@@ -1,6 +1,9 @@
 import { promises as fs } from 'fs';
 import * as PE from 'pe-library';
 
+// Disable warnings in order to suppress "ExperimentalWarning: The fs.promises API is experimental"
+process.removeAllListeners('warning');
+
 const main = async () => {
   if (process.argv.length !== 3) {
     console.log('Error: Please provide the path to the file to patch');
