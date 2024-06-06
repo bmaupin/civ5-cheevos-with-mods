@@ -2,13 +2,12 @@
   "devDependencies": {
     "@types/node": "^20.12.12",
     "esbuild": "^0.21.3",
-    "pkg": "^5.8.1"
+    "nexe": "^4.0.0-rc.6"
   },
   "dependencies": {
     "pe-library": "^1.0.1"
   },
   "engines": {
     "node": ">=14"
-  },
-  "type": "module"
+  }
 }
