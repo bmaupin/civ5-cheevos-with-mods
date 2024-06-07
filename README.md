@@ -55,7 +55,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 1. Run the patch tool, e.g.
 
    ```
-   patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV.exe'
+   patchciv.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV.exe'
    ```
 
 1. When playing the game, choose DirectX 9 (unfortunately the patch doesn't work for DirectX 11)
