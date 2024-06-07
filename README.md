@@ -2,7 +2,7 @@
 
 💡 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
 
-This is a patch to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enables achievements while playing with mods.
+Patches to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enable achievements while playing with mods.
 
 ## Instructions
 
@@ -10,7 +10,7 @@ This is a patch to Sid Meier's Civilization V or Sid Meier's Civilization: Beyon
 
 1. Start the game in Steam
 
-   ⓘ If playing Civ 5 in Proton or Windows, choose DirectX 11
+   ⓘ If playing Civ 5 in Proton or Windows, choose the patched version of DirectX as indicated below
 
 1. Open the _Mods_ menu and play the game with mods as desired
 
@@ -26,10 +26,16 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (Proton)
 
-Open a terminal and run this command:
+For DirectX 11, open a terminal and run this command:
 
 ```
 sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
+```
+
+For DirectX 9, run the patch script:
+
+```
+./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
 ```
 
 #### macOS
@@ -44,28 +50,15 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
+1. Download the patch tool from [Releases](https://github.com/bmaupin/civ5-cheevos-with-mods/releases)
 
-ⓘ It will take a minute or so to run; wait until it says "Patch complete."
+1. Run the patch tool, e.g.
 
-```
-function Replace-ContentInFile {
-    param (
-        [string]$FilePath
-    )
-    $data = Get-Content -Encoding Byte -ReadCount 0 $FilePath
-    $dataAsHexString = [BitConverter]::ToString($data)
-    $search = 'SELECT ModID from Mods where Activated = 1'
-    $replacement = 'SELECT ModID from Mods where Activated = 2'
-    $searchAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($search))
-    $replaceAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($replacement))
-    $dataAsHexString = $dataAsHexString.Replace($searchAsHexString, $replaceAsHexString)
-    $modifiedData = [byte[]] ($dataAsHexString -split '-' -replace '^', '0x')
-    Set-Content -Encoding Byte $FilePath -Value $modifiedData
-    Write-Host "Patch complete"
-}
-Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
-```
+   ```
+   patch-civ5.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV.exe'
+   ```
+
+1. When playing the game, choose DirectX 9 (unfortunately the patch doesn't work for DirectX 11)
 
 ## Install patch (Beyond Earth)
 
@@ -83,6 +76,8 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 ```
 
 #### Windows
+
+⚠️ This is untested
 
 Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 
@@ -120,22 +115,4 @@ To uninstall this patch:
 
 ## How the patch works
 
-The game stores mod information in an SQLite database, which it then queries to see which mods are enabled; achivements are only allowed for mods that come with the game or its DLC.
-
-This is the query that is used to determine which mods are activated:
-
-```
-SELECT ModID from Mods where Activated = 1
-```
-
-Because SQLite doesn't have a boolean type, the mod activation status is stored as an integer with a value of `0` if the mod is not activated and `1` if the mod is activated.
-
-This patch changes the query to:
-
-```
-SELECT ModID from Mods where Activated = 2
-```
-
-As a result, the query will never return any results and so the game will always think that there are no mods enabled.
-
-Thankfully the query is only used for this one purpose, so modifying it doesn't break anything else in the game.
+See [docs/details.md](docs/details.md)
