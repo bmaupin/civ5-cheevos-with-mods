@@ -64,7 +64,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (native)
 
-⚠️ Mod support for the native Linux version seems to be broken; use Proton instead.
+Install the patch to fix the crash when playing with mods here: [https://github.com/bmaupin/civ-be-linux-crash](https://github.com/bmaupin/civ-be-linux-crash)
 
 #### Linux (Proton)
 
