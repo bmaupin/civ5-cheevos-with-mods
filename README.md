@@ -64,7 +64,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (native)
 
-Install the patch to fix the crash when playing with mods here: [https://github.com/bmaupin/civ-be-linux-crash](https://github.com/bmaupin/civ-be-linux-crash)
+Install the patch to fix the crash when playing with mods here: [https://github.com/bmaupin/civ-be-linux-fixes](https://github.com/bmaupin/civ-be-linux-fixes). It will also enable achievements with mods.
 
 #### Linux (Proton)
 
