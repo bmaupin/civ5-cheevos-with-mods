@@ -1,18 +1,8 @@
 # Enable achievements with mods in Civ 5 or Beyond Earth
 
-💡 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
+📌 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
 
 Patches to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enable achievements while playing with mods.
-
-## Instructions
-
-1. Install the patch following the instructions below
-
-1. Start the game in Steam
-
-   ⓘ If playing Civ 5 in Proton or Windows, choose the patched version of DirectX as indicated below
-
-1. Open the _Mods_ menu and play the game with mods as desired
 
 ## Install patch (Civ 5)
 
@@ -26,21 +16,17 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (Proton)
 
-For DirectX 11, open a terminal and run this command:
+1. Run the patch script:
 
-```
-sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
-```
+   ```
+   ./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
+   ```
 
-For DirectX 9, run the patch script:
-
-```
-./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
-```
+1. When playing the game, choose DirectX 9 (unfortunately the patch doesn't work for DirectX 11)
 
 #### macOS
 
-⚠️ This is untested
+⚠️ This is untested; if anyone tests it please [create a new issue](https://github.com/bmaupin/civ5-cheevos-with-mods/issues) and I'll update this
 
 Open a terminal and run this command:
 
@@ -77,7 +63,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is untested
+⚠️ This is untested; if anyone tests it please [create a new issue](https://github.com/bmaupin/civ5-cheevos-with-mods/issues) and I'll update this
 
 Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 

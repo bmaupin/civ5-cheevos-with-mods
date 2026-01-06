@@ -1,6 +1,6 @@
 # Details
 
-## DirectX 11
+## Linux/Mac
 
 #### How the patch works
 
@@ -24,7 +24,7 @@ As a result, the query will never return any results and so the game will always
 
 Thankfully the query is only used for this one purpose, so modifying it doesn't break anything else in the game.
 
-#### Install the DirectX 11 patch on Windows
+#### Install this patch on Windows
 
 ⚠️ This doesn't seem to work, which is why these notes were moved out of the way (https://github.com/bmaupin/civ5-cheevos-with-mods/issues/1)
 
