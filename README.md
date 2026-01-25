@@ -1,6 +1,10 @@
 # Enable achievements with mods in Civ 5 or Beyond Earth
 
-📌 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
+> [!TIP]
+> [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
+
+> [!IMPORTANT]
+> [This patch will not work with Vox Populi](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/4#issuecomment-3796923109). To enable achievements with Vox Populi, ask on [Civ Fanatics](https://forums.civfanatics.com/forums/community-patch-project.497/) or [create an issue in GitHub](https://github.com/LoneGazebo/Community-Patch-DLL/issues).
 
 Patches to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enable achievements while playing with mods.
 
