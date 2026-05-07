@@ -3,7 +3,7 @@
 📌 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
 
 > [!IMPORTANT]
-> [This patch will not work with Vox Populi](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/4#issuecomment-3796923109). To enable achievements with Vox Populi, ask on [Civ Fanatics](https://forums.civfanatics.com/forums/community-patch-project.497/) or [create an issue in GitHub](https://github.com/LoneGazebo/Community-Patch-DLL/issues).
+> Civ 5 and Beyond Earth have [Steam Custom Executable Generation (CEG)](docs/ceg.md) which often prevent the Windows version of the game from working with the patch applied. Some workarounds are detailed below.
 
 Patches to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enable achievements while playing with mods.
 
@@ -19,19 +19,11 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (Proton)
 
-⚠️ If it doesn't work, [try the legacy version of the game](https://www.pcgamingwiki.com/wiki/Sid_Meier's_Civilization_V#Windows_and_macOS_version_mismatch).
-
-1. Run the patch script:
-
-   ```
-   ./scripts/apply-patch.sh "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV.exe"
-   ```
-
-1. When playing the game, choose DirectX 9 (unfortunately the patch doesn't work for DirectX 11)
+See the _Windows_ notes below. The Windows patch tool can be run using Wine, or you can also run this patch script which does the same thing: [scripts/apply-patch.sh](scripts/apply-patch.sh)
 
 #### macOS
 
-⚠️ This is untested; if anyone tests it please [create a new issue](https://github.com/bmaupin/civ5-cheevos-with-mods/issues) and I'll update this
+⚠️ This is untested
 
 Open a terminal and run this command:
 
@@ -41,7 +33,12 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ If it doesn't work, [try the legacy version of the game](https://www.pcgamingwiki.com/wiki/Sid_Meier's_Civilization_V#Windows_and_macOS_version_mismatch).
+Here are some options for playing with achievements on Windows:
+
+- Play with Vox Populi, as [it seems to have its own method for enabling achievements](https://github.com/search?q=repo%3ALoneGazebo%2FCommunity-Patch-DLL+achievements&type=code); ask on [Civ Fanatics](https://forums.civfanatics.com/forums/community-patch-project.497/) or [create an issue in GitHub](https://github.com/LoneGazebo/Community-Patch-DLL/issues) for more information
+- You can try the patch below as-is; if it doesn't work, follow the steps to uninstall the patch and then try again as sometimes it seems to work and other times it doesn't
+
+To install the patch:
 
 1. Download the patch tool from [Releases](https://github.com/bmaupin/civ5-cheevos-with-mods/releases)
 
@@ -61,6 +58,8 @@ Install the patch to fix the crash when playing with mods here: [https://github.
 
 #### Linux (Proton)
 
+⚠️ This may fail due to Steam CEG. See the Civ 5 Windows notes above for more information.
+
 Open a terminal and run these commands:
 
 ```
@@ -70,7 +69,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is untested; if anyone tests it please [create a new issue](https://github.com/bmaupin/civ5-cheevos-with-mods/issues) and I'll update this
+⚠️ This is untested; there is a strong chance it will not work due to Steam CEG. See the Civ 5 Windows notes above for more information.
 
 Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 
