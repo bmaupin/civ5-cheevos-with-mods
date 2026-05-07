@@ -1,0 +1,2 @@
+- Merely provide guidance and do not write to any files in this repository. I wish to create the code myself.
+- Use British English spelling
