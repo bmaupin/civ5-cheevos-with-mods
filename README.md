@@ -2,9 +2,6 @@
 
 📌 [See my other Civ projects here](https://github.com/search?q=user%3Abmaupin+topic%3Acivilization&type=Repositories)
 
-> [!IMPORTANT]
-> Civ 5 and Beyond Earth have [Steam Custom Executable Generation (CEG)](docs/ceg.md) which often prevent the Windows version of the game from working with the patch applied. Some workarounds are detailed below.
-
 Patches to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth that enable achievements while playing with mods.
 
 ## Install patch (Civ 5)
@@ -33,10 +30,10 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-Here are some options for playing with achievements on Windows:
+⚠️ Steam Custom Executable Generation (CEG) will often prevent the patch from working. Here are some options for playing with achievements on Windows:
 
 - Play with Vox Populi, as [it seems to have its own method for enabling achievements](https://github.com/search?q=repo%3ALoneGazebo%2FCommunity-Patch-DLL+achievements&type=code); ask on [Civ Fanatics](https://forums.civfanatics.com/forums/community-patch-project.497/) or [create an issue in GitHub](https://github.com/LoneGazebo/Community-Patch-DLL/issues) for more information
-- You can try the patch below as-is; if it doesn't work, follow the steps to uninstall the patch and then try again as sometimes it seems to work and other times it doesn't
+- You can try the patch below anyway; if it doesn't work, follow the steps to uninstall the patch and then try again as sometimes it seems to work and other times it doesn't
 
 To install the patch:
 
@@ -58,8 +55,6 @@ Install the patch to fix the crash when playing with mods here: [https://github.
 
 #### Linux (Proton)
 
-⚠️ This may fail due to Steam CEG. See the Civ 5 Windows notes above for more information.
-
 Open a terminal and run these commands:
 
 ```
@@ -69,7 +64,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is untested; there is a strong chance it will not work due to Steam CEG. See the Civ 5 Windows notes above for more information.
+⚠️ This is untested
 
 Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 
