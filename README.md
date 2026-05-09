@@ -32,7 +32,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 ⚠️ Steam Custom Executable Generation (CEG) will often prevent the patch from working. Here are some options for playing with achievements on Windows:
 
-- Play with Vox Populi, as [it seems to have its own method for enabling achievements](https://github.com/search?q=repo%3ALoneGazebo%2FCommunity-Patch-DLL+achievements&type=code); ask on [Civ Fanatics](https://forums.civfanatics.com/forums/community-patch-project.497/) or [create an issue in GitHub](https://github.com/LoneGazebo/Community-Patch-DLL/issues) for more information
+- Play with [Vox Populi](https://github.com/LoneGazebo/Community-Patch-DLL); to enable achievements edit `MODS\(1) Community Patch\Database Changes\NewCustomModOptions.xml` and set `ENABLE_ACHIEVEMENTS` to `1` ([source](https://github.com/LoneGazebo/Community-Patch-DLL/issues/12965#issuecomment-4410197668))
 - You can try the patch below anyway; if it doesn't work, follow the steps to uninstall the patch and then try again as sometimes it seems to work and other times it doesn't
 
 To install the patch:
