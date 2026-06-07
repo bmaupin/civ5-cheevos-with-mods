@@ -72,3 +72,18 @@ Read more about CEG here: https://en.wikipedia.org/wiki/Steam_(service)#Software
 1. Look for `AD DE 00 80` in binary (`0x8000DEAD`)
    - `0x160516`
    - Used in `UndefinedFunction_00561110`
+
+## Proton
+
+These commits were added to Proton 6.3.8 to fix CEG support:
+
+- https://github.com/ValveSoftware/Proton/commit/fdc3651992b38ed2b316f92ccf7406f2ac88c005
+- https://github.com/ValveSoftware/Proton/commit/7d37e79328434ba6de27dcbf35bb671e281d9627
+- https://github.com/ValveSoftware/Proton/commit/f2ff463c085b022215141cf393df9d08e35a9247
+- https://github.com/ValveSoftware/Proton/commit/5b7de85bdf76bf6dd894528f8046d624a2a5d6c0
+
+## SQL query
+
+- Query is at `00a70210`
+- used at `0x0053ef52`
+- Seems to be outside the code and addresses in noceg.json (therefor the parts of the code immediately protected by CEG), but my guess is that CEG is checksumming the entire binary
