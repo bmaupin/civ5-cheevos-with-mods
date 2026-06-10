@@ -58,6 +58,8 @@ Read more about CEG here: https://en.wikipedia.org/wiki/Steam_(service)#Software
 
 These commits were added to Proton 6.3.8 to fix CEG support:
 
+(https://github.com/search?q=repo%3AValveSoftware%2FProton+CW-Bug-Id%3A+%2315930&type=commits)
+
 - https://github.com/ValveSoftware/Proton/commit/fdc3651992b38ed2b316f92ccf7406f2ac88c005
 - https://github.com/ValveSoftware/Proton/commit/7d37e79328434ba6de27dcbf35bb671e281d9627
 - https://github.com/ValveSoftware/Proton/commit/f2ff463c085b022215141cf393df9d08e35a9247

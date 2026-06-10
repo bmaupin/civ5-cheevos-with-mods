@@ -16,11 +16,34 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (Proton)
 
-See the _Windows_ notes below. The Windows patch tool can be run using Wine, or you can also run this patch script which does the same thing: [scripts/apply-patch.sh](scripts/apply-patch.sh)
+If you're using Vox Populi, see the _Windows_ notes below. Otherwise, this patch will not work on Linux yet because of Steam CEG.
+
+<!-- Read the _Windows_ notes below first, with these adjustments:
+
+- Wine can be used to run the NoCEG tool, e.g.
+
+  ```
+  cd ~/.local/share/Steam/steamapps/common/Sid\ Meier\'s\ Civilization\ V/
+  cp CivilizationV_DX11.exe CivilizationV_DX11.exe.bak
+  wine noceg_signatures.exe CivilizationV_DX11.exe
+  STEAM_COMPAT_DATA_PATH="/home/$USER/.local/share/Steam/steamapps/compatdata
+  /8930/" STEAM_COMPAT_CLIENT_INSTALL_PATH="/home/$USER/.local/share/Steam" "/home/$USER/.local/share/Steam/steamapps/common/Proton 9.0 (Beta)/proton" waitforexitan
+  drun CivilizationV_DX11.exe
+  wine noceg_patcher.exe CivilizationV_DX11.exe
+  cp CivilizationV_DX11_noceg.exe CivilizationV_DX11.exe
+  ```
+
+- Once the binary is patched with NoCEG, you can apply the cheevos patch like this:
+
+  ```
+  sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
+  ```
+
+See the _Windows_ notes below. The Windows patch tool can be run using Wine, or you can also run this patch script which does the same thing: [scripts/apply-patch.sh](scripts/apply-patch.sh) -->
 
 #### macOS
 
-⚠️ This is untested
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
 
 Open a terminal and run this command:
 
@@ -30,22 +53,40 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ Steam Custom Executable Generation (CEG) will often prevent the patch from working. Here are some options for playing with achievements on Windows:
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
 
-- Play with [Vox Populi](https://github.com/LoneGazebo/Community-Patch-DLL); to enable achievements edit `MODS\(1) Community Patch\Database Changes\NewCustomModOptions.xml` and set `ENABLE_ACHIEVEMENTS` to `1` ([source](https://github.com/LoneGazebo/Community-Patch-DLL/issues/12965#issuecomment-4410197668))
-- You can try the patch below anyway; if it doesn't work, follow the steps to uninstall the patch and then try again as sometimes it seems to work and other times it doesn't
+👉 If you're using [Vox Populi](https://github.com/LoneGazebo/Community-Patch-DLL) you shouldn't need this patch; instead to enable achievements edit `MODS\(1) Community Patch\Database Changes\NewCustomModOptions.xml` and set `ENABLE_ACHIEVEMENTS` to `1` ([source](https://github.com/LoneGazebo/Community-Patch-DLL/issues/12965#issuecomment-4410197668))
 
 To install the patch:
 
-1. Download the patch tool from [Releases](https://github.com/bmaupin/civ5-cheevos-with-mods/releases)
+1. Follow the steps here to remove Steam Custom Executable Generation (CEG): [https://github.com/iArtorias/noceg](https://github.com/iArtorias/noceg)
+   - Run it on CivilizationV.exe for the DirectX 9 version of the game
+   - Run it on CivilizationV_DX11.exe for the DirectX 10/11 version of the game
 
-1. Run the patch tool, e.g.
+1. Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
+
+   ⓘ It will take a minute or so to run; wait until it says "Patch complete"
 
    ```
-   patchciv.exe 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV.exe'
+   function Replace-ContentInFile {
+       param (
+           [string]$FilePath
+       )
+       $data = Get-Content -Encoding Byte -ReadCount 0 $FilePath
+       $dataAsHexString = [BitConverter]::ToString($data)
+       $search = 'SELECT ModID from Mods where Activated = 1'
+       $replacement = 'SELECT ModID from Mods where Activated = 2'
+       $searchAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($search))
+       $replaceAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($replacement))
+       $dataAsHexString = $dataAsHexString.Replace($searchAsHexString, $replaceAsHexString)
+       $modifiedData = [byte[]] ($dataAsHexString -split '-' -replace '^', '0x')
+       Set-Content -Encoding Byte $FilePath -Value $modifiedData
+       Write-Host "Patch complete"
+   }
+   Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization V\CivilizationV_DX11.exe'
    ```
 
-1. When playing the game, choose DirectX 9 (unfortunately the patch doesn't work for DirectX 11)
+   (Replace `CivilizationV_DX11.exe` with `CivilizationV.exe` for the DirectX 9 version of the game)
 
 ## Install patch (Beyond Earth)
 
@@ -64,31 +105,36 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is untested
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
 
-Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
+1. Follow the steps here to remove Steam Custom Executable Generation (CEG): [https://github.com/iArtorias/noceg](https://github.com/iArtorias/noceg)
+   - Run it on CivilizationBE_DX11.exe for the DirectX 11 version of the game
+   - Run it on CivilizationBE_Mantle.exe for the Mantle version of the game
 
-ⓘ It will take a minute or so to run; wait until it says "Patch complete."
+1. Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 
-```
-function Replace-ContentInFile {
-    param (
-        [string]$FilePath
-    )
-    $data = Get-Content -Encoding Byte -ReadCount 0 $FilePath
-    $dataAsHexString = [BitConverter]::ToString($data)
-    $search = 'SELECT ModID from Mods where Activated = 1'
-    $replacement = 'SELECT ModID from Mods where Activated = 2'
-    $searchAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($search))
-    $replaceAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($replacement))
-    $dataAsHexString = $dataAsHexString.Replace($searchAsHexString, $replaceAsHexString)
-    $modifiedData = [byte[]] ($dataAsHexString -split '-' -replace '^', '0x')
-    Set-Content -Encoding Byte $FilePath -Value $modifiedData
-    Write-Host "Patch complete"
-}
-Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe'
-Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_Mantle.exe'
-```
+   ⓘ It will take a minute or so to run; wait until it says "Patch complete."
+
+   ```
+   function Replace-ContentInFile {
+       param (
+           [string]$FilePath
+       )
+       $data = Get-Content -Encoding Byte -ReadCount 0 $FilePath
+       $dataAsHexString = [BitConverter]::ToString($data)
+       $search = 'SELECT ModID from Mods where Activated = 1'
+       $replacement = 'SELECT ModID from Mods where Activated = 2'
+       $searchAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($search))
+       $replaceAsHexString = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($replacement))
+       $dataAsHexString = $dataAsHexString.Replace($searchAsHexString, $replaceAsHexString)
+       $modifiedData = [byte[]] ($dataAsHexString -split '-' -replace '^', '0x')
+       Set-Content -Encoding Byte $FilePath -Value $modifiedData
+       Write-Host "Patch complete"
+   }
+   Replace-ContentInFile -FilePath 'C:\Program Files (x86)\Steam\steamapps\common\Sid Meier''s Civilization Beyond Earth\CivilizationBE_DX11.exe'
+   ```
+
+   (Replace `CivilizationBE_DX11.exe` with `CivilizationBE_Mantle.exe` for the Mantle version of the game)
 
 ## Uninstall patch
 
