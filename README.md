@@ -8,6 +8,8 @@ Patches to Sid Meier's Civilization V or Sid Meier's Civilization: Beyond Earth 
 
 #### Linux (native)
 
+⚠️ [Map type achievements are broken in Linux native](https://steamcommunity.com/app/8930/discussions/0/558756256352674968/). This has nothing to do with this patch as they don't work without mods either. They do work in Linux with Proton.
+
 Open a terminal and run this command:
 
 ```
