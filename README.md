@@ -16,20 +16,22 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Linux (Proton)
 
-If you're using Vox Populi, see the _Windows_ notes below. Otherwise, this patch will not work on Linux yet because of Steam CEG.
-
-<!-- Read the _Windows_ notes below first, with these adjustments:
+Read the _Windows_ notes below first, with these adjustments:
 
 - Wine can be used to run the NoCEG tool, e.g.
 
   ```
   cd ~/.local/share/Steam/steamapps/common/Sid\ Meier\'s\ Civilization\ V/
+
   cp CivilizationV_DX11.exe CivilizationV_DX11.exe.bak
+
   wine noceg_signatures.exe CivilizationV_DX11.exe
-  STEAM_COMPAT_DATA_PATH="/home/$USER/.local/share/Steam/steamapps/compatdata
-  /8930/" STEAM_COMPAT_CLIENT_INSTALL_PATH="/home/$USER/.local/share/Steam" "/home/$USER/.local/share/Steam/steamapps/common/Proton 9.0 (Beta)/proton" waitforexitan
-  drun CivilizationV_DX11.exe
+
+  # 👉 Use the same Proton version as configured in Steam or just run the game from Steam
+  STEAM_COMPAT_DATA_PATH="/home/$USER/.local/share/Steam/steamapps/compatdata/8930/" STEAM_COMPAT_CLIENT_INSTALL_PATH="/home/$USER/.local/share/Steam" "/home/$USER/.local/share/Steam/steamapps/common/Proton 9.0 (Beta)/proton" waitforexitandrun CivilizationV_DX11.exe
+
   wine noceg_patcher.exe CivilizationV_DX11.exe
+
   cp CivilizationV_DX11_noceg.exe CivilizationV_DX11.exe
   ```
 
@@ -38,8 +40,6 @@ If you're using Vox Populi, see the _Windows_ notes below. Otherwise, this patch
   ```
   sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods where Activated = 2/' "/home/$USER/.steam/steam/steamapps/common/Sid Meier's Civilization V/CivilizationV_DX11.exe"
   ```
-
-See the _Windows_ notes below. The Windows patch tool can be run using Wine, or you can also run this patch script which does the same thing: [scripts/apply-patch.sh](scripts/apply-patch.sh) -->
 
 #### macOS
 
@@ -60,8 +60,8 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 To install the patch:
 
 1. Follow the steps here to remove Steam Custom Executable Generation (CEG): [https://github.com/iArtorias/noceg](https://github.com/iArtorias/noceg)
-   - Run it on CivilizationV.exe for the DirectX 9 version of the game
-   - Run it on CivilizationV_DX11.exe for the DirectX 10/11 version of the game
+   - Run it on `CivilizationV.exe` for the DirectX 9 version of the game
+   - Run it on `CivilizationV_DX11.exe` for the DirectX 10/11 version of the game
 
 1. Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 
@@ -108,8 +108,8 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 ⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
 
 1. Follow the steps here to remove Steam Custom Executable Generation (CEG): [https://github.com/iArtorias/noceg](https://github.com/iArtorias/noceg)
-   - Run it on CivilizationBE_DX11.exe for the DirectX 11 version of the game
-   - Run it on CivilizationBE_Mantle.exe for the Mantle version of the game
+   - Run it on `CivilizationBE_DX11.exe` for the DirectX 11 version of the game
+   - Run it on `CivilizationBE_Mantle.exe` for the Mantle version of the game
 
 1. Paste these commands in PowerShell and then press Enter ([source](https://stackoverflow.com/a/73791858/399105)):
 
