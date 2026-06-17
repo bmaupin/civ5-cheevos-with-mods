@@ -45,7 +45,7 @@ Read the _Windows_ notes below first, with these adjustments:
 
 #### macOS
 
-⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/6) if it's working for you
 
 Open a terminal and run this command:
 
@@ -55,7 +55,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/6) if it's working for you
 
 👉 If you're using [Vox Populi](https://github.com/LoneGazebo/Community-Patch-DLL) you shouldn't need this patch; instead to enable achievements edit `MODS\(1) Community Patch\Database Changes\NewCustomModOptions.xml` and set `ENABLE_ACHIEVEMENTS` to `1` ([source](https://github.com/LoneGazebo/Community-Patch-DLL/issues/12965#issuecomment-4410197668))
 
@@ -98,6 +98,8 @@ Install the patch to fix the crash when playing with mods here: [https://github.
 
 #### Linux (Proton)
 
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/6) if it's working for you
+
 Open a terminal and run these commands:
 
 ```
@@ -107,7 +109,7 @@ sed -i 's/SELECT ModID from Mods where Activated = 1/SELECT ModID from Mods wher
 
 #### Windows
 
-⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/) if it's working for you
+⚠️ This is unconfirmed; please [report](https://github.com/bmaupin/civ5-cheevos-with-mods/issues/6) if it's working for you
 
 1. Follow the steps here to remove Steam Custom Executable Generation (CEG): [https://github.com/iArtorias/noceg](https://github.com/iArtorias/noceg)
    - Run it on `CivilizationBE_DX11.exe` for the DirectX 11 version of the game
